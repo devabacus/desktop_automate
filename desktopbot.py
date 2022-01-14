@@ -1,22 +1,45 @@
-from pynput import mouse
-from mouse_rec_handle import ActionRecorder
+from cmd import Cmd
+from pynput import mouse,keyboard
+from keyboard_rec_handle import KeyboardRecorder
+from mouse_rec_handle import MouseRecorder
 import time
 import sys
 
-def write_to_file(actions):
-    with open('actions.txt', 'w', encoding = 'utf8') as f:
-        f.write(actions)
-        f.close()
-        
+class ActionRecorder():
+    
+    def __init__ (self):
+        self.act_m = MouseRecorder(self.rec_handle)
+        self.act_k = KeyboardRecorder(self.rec_handle)
+        self.mouse_listen()
+        self.keyboard_listen()
+        self.actions = ''
+        self.last_time_act = round(time.perf_counter(),2)
+    
+    def delay(self):
+        delay = 0    
+        delay = round(time.perf_counter(),2) - self.last_time_act
+        self.last_time_act = round(time.perf_counter(), 2)
+        return Cmd.SLEEP(delay)
+    
+    def write_to_file(self):
+        with open('actions.txt', 'w', encoding = 'utf8') as f:
+            f.write(self.actions)
+            f.close()        
 
-act = ActionRecorder(write_to_file) 
+    def mouse_listen(self):
+        listener = mouse.Listener(on_click=self.act_m.on_click, on_scroll=self.act_m.on_scroll)
+        listener.start()           
+    def keyboard_listen(self):
+        listener = keyboard.Listener(on_press=self.act_k.on_press,on_release=self.act_k.on_release)
+        listener.start() 
 
-listener = mouse.Listener(
-    on_click=act.on_click,
-    on_scroll=act.on_scroll)
-listener.start()
+    def rec_handle(self, comm_str):
+        self.actions += self.delay() + comm_str
+        if 'keyboard.release(Key.esc)' in comm_str:
+            self.write_to_file()
+            
 
-
+ActionRecorder()
 
 while True:
     time.sleep(10)
