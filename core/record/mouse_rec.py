@@ -1,4 +1,4 @@
-from cmd import Cmd
+from core.cmd import Cmd
 
 class MouseRecorder():
     

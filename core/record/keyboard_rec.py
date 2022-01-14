@@ -1,5 +1,4 @@
-from cmd import Cmd
-import time
+from core.cmd import Cmd
 from pynput.keyboard import Key as k
 
 # '\'\\x03\''

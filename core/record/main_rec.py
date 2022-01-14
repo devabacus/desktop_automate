@@ -1,12 +1,8 @@
-from cmd import Cmd
-from pickletools import pynone
+from core.cmd import Cmd
 from pynput import mouse,keyboard
-from keyboard_rec_handle import KeyboardRecorder
-from mouse_rec_handle import MouseRecorder
+from core.record.keyboard_rec import KeyboardRecorder
+from core.record.mouse_rec import MouseRecorder
 import time
-import sys
-
-
 
 # keyboard._win32.KeyCode
 class ActionRecorder():
@@ -45,11 +41,5 @@ class ActionRecorder():
         self.actions += self.delay() + comm_str
         if 'keyboard.release(Key.esc)' in comm_str:
             self.write_to_file()
+            exit()
             
-
-ActionRecorder()
-
-while True:
-    time.sleep(10)
-
-
