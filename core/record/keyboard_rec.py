@@ -19,17 +19,10 @@ class KeyboardRecorder():
     def __init__ (self, handle):
         self.handle = handle
       
-    
-      
     def on_press(self, key):
-        try:
-            self.handle(Cmd.KEY_PRESS(check_key(key)))
-            # print(key)
-            
-        except AttributeError:
-            print(f'special key {key} pressed')
+        self.handle(Cmd.KEY_CMD(check_key(key),True))
 
     def on_release(self,key):
-        self.handle(Cmd.KEY_RELEASE(check_key(key)))
+        self.handle(Cmd.KEY_CMD(check_key(key),False))
         
 

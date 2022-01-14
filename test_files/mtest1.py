@@ -1,4 +1,5 @@
-str1 = '\'\\x03\''
-int1 = 0x03
-str2 = str(int1)
-print(str1)
+import pyautogui as pg
+
+# pyautogui.drag(100, 100, 0.2, button='left')
+
+pg.moveTo(100,400,0.54)

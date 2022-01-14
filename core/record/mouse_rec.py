@@ -14,7 +14,8 @@ class MouseRecorder():
         else: return ''
     
     def on_click(self, x, y, button, pressed):
-        self.handle(self.get_mouse_pos(x,y) + Cmd.MOUSE_CLICK(pressed, button))
+        # self.handle(self.get_mouse_pos(x,y) + Cmd.MOUSE_CLICK(pressed, button))
+        self.handle(Cmd.MOUSE_CLICK(x,y,pressed,button))
              
     def on_scroll(self, x, y, dx, dy):
         self.handle(Cmd.MOUSE_MOVE(x,y) + Cmd.MOUSE_SCROLL(dy))

@@ -38,8 +38,9 @@ class ActionRecorder():
         listener.start() 
 
     def rec_handle(self, comm_str):
+        print(self.delay() + comm_str)
         self.actions += self.delay() + comm_str
-        if 'keyboard.release(Key.esc)' in comm_str:
+        if 'esc' in comm_str:
             self.write_to_file()
             exit()
             

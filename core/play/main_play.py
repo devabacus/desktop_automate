@@ -4,6 +4,7 @@ from pynput.mouse import Button
 import pynput.keyboard as kb
 from pynput.keyboard import Key
 import time
+import pyautogui as pg
 
 mouse = ms.Controller()
 keyboard = kb.Controller()
