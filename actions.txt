@@ -1,0 +1,8 @@
+time.sleep(4.42)
+mouse.press(Button.left)
+time.sleep(0.13)
+mouse.release(Button.left)
+time.sleep(0.88)
+mouse.press(Button.left)
+time.sleep(0.11)
+mouse.release(Button.left)

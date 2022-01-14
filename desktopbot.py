@@ -1,57 +1,24 @@
 from pynput import mouse
-
-class ActionRecorder():
-    
-    def __init__ (self, handler_func):
-        self.actions = ''
-        self.handler = handler_func
-    
-    def on_click(self, x, y, button, pressed):
-        press_release = 'mouse.press' if pressed else 'mouse.release'
-        self.actions += f'mouse.move({x},{y})\n{press_release}({button})\n'
-        if x == 0 and y == 0:
-            self.handler(self.actions)
-        print(self.actions)
-             
-
-    def on_scroll(self, x, y, dx, dy):
-        print('Scrolled {0} at {1}'.format(
-            'down' if dy < 0 else 'up',
-            (x, y)))
-
-    def on_release(x,y, dx, dy):
-        print(f'release at {x},{y}')
-
-    # Collect events until released
-
+from mouse_rec_handle import ActionRecorder
+import time
+import sys
 
 def write_to_file(actions):
-    
-    with open('actions.txt', 'a', encoding = 'utf8') as f:
+    with open('actions.txt', 'w', encoding = 'utf8') as f:
         f.write(actions)
+        f.close()
+        
 
-
- 
 act = ActionRecorder(write_to_file) 
-    
-with mouse.Listener(
-            # on_move=on_move,
-            on_click=act.on_click,
-            on_scroll=act.on_scroll) as listener:
-        listener.join()
 
-    # ...or, in a non-blocking fashion:
 listener = mouse.Listener(
-    # on_move=on_move,
     on_click=act.on_click,
-    on_scroll=act.on_scroll,
-    on_release = act.on_release
-    )
+    on_scroll=act.on_scroll)
 listener.start()
 
 
 
-
-
+while True:
+    time.sleep(10)
 
 
