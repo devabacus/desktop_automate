@@ -7,7 +7,7 @@ def for_canonical(f):
     return lambda k: f(l.canonical(k))
 
 hotkey = keyboard.HotKey(
-    keyboard.HotKey.parse('<ctrl>+<alt>+h'),
+    keyboard.HotKey.parse('<ctrl>+c'),
     on_activate)
 with keyboard.Listener(
         on_press=for_canonical(hotkey.press),
