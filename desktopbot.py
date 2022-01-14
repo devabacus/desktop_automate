@@ -7,11 +7,11 @@ class ActionRecorder():
         self.handler = handler_func
     
     def on_click(self, x, y, button, pressed):
-         press_release = 'Pressed' if pressed else 'Released'
-         self.actions += f'{button} {press_release} {(x, y)}\n'
-         if x == 0 and y == 0:
-             self.handler(self.actions)
-             print("callback")
+        press_release = 'mouse.press' if pressed else 'mouse.release'
+        self.actions += f'mouse.move({x},{y})\n{press_release}({button})\n'
+        if x == 0 and y == 0:
+            self.handler(self.actions)
+        print(self.actions)
              
 
     def on_scroll(self, x, y, dx, dy):
@@ -27,7 +27,7 @@ class ActionRecorder():
 
 def write_to_file(actions):
     
-    with open('actions.txt', 'w', encoding = 'utf8') as f:
+    with open('actions.txt', 'a', encoding = 'utf8') as f:
         f.write(actions)
 
 
