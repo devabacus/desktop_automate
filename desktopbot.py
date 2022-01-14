@@ -1,6 +1,5 @@
 from pynput import mouse
 
-
 class ActionRecorder():
     
     def __init__ (self, handler_func):
