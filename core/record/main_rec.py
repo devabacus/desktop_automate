@@ -1,5 +1,6 @@
 from core.cmd import Cmd
 from pynput import mouse,keyboard
+from core.record.delay import Delay
 from core.record.keyboard_rec import KeyboardRecorder
 from core.record.mouse_rec import MouseRecorder
 import time
@@ -8,20 +9,20 @@ import time
 class ActionRecorder():
     
     def __init__ (self):
-        self.act_m = MouseRecorder(self.rec_handle)
-        self.act_k = KeyboardRecorder(self.rec_handle)
+        self.delay = Delay()
+        print(self.delay)
+        self.act_m = MouseRecorder(self.rec_handle, self.delay)
+        self.act_k = KeyboardRecorder(self.rec_handle, self.delay)
         self.mouse_listen()
         self.keyboard_listen()
         self.actions = ''
         self.last_time_act = round(time.perf_counter(),2)
     
-    def delay(self):
-        delay = 0    
-        delay = 0    
-        delay = 0    
-        delay = round(time.perf_counter(),2) - self.last_time_act
-        self.last_time_act = round(time.perf_counter(), 2)
-        return Cmd.SLEEP(delay)
+    # def delay(self):
+    #     delay = 0    
+    #     delay = round(time.perf_counter(),2) - self.last_time_act
+    #     self.last_time_act = round(time.perf_counter(), 2)
+    #     return Cmd.SLEEP(delay)
     
     def write_to_file(self):
         with open('actions.txt', 'w', encoding = 'utf8') as f:
@@ -38,8 +39,10 @@ class ActionRecorder():
         listener.start() 
 
     def rec_handle(self, comm_str):
-        print(self.delay() + comm_str)
-        self.actions += self.delay() + comm_str
+        # print(self.delay() + comm_str)
+        # self.actions += self.delay() + comm_str
+        print(comm_str)
+        self.actions += comm_str
         if 'esc' in comm_str:
             self.write_to_file()
             exit()

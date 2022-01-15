@@ -16,9 +16,10 @@
         
 
 class Cmd():
-    MOUSE_MOVE = lambda x,y: f'pg.moveTo({x},{y})\n'
-    SLEEP = lambda x: f'time.sleep({round(x,2)})\n'
-    MOUSE_SCROLL = lambda y: f'pg.scroll({y}00)\n'
+    MOUSE_MOVE = lambda x,y, delay: f'pg.moveTo({x},{y}, duration={delay})\n'
+    SLEEP = lambda delay: f'time.sleep({delay})\n'
+    # MOUSE_SCROLL = lambda y: f'pg.scroll({y}00)\n'
+    MOUSE_SCROLL = lambda y: f'mouse.scroll(0,{y})\n'
     
     def KEY_CMD(key, isPress):
         comm = 'pg.key'
