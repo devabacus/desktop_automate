@@ -25,11 +25,22 @@ class MainUiCore():
         self.recordThread.start()
         
     def run_record(self):
-        ActionRecorder(self.filePath)
+        
+        ActionRecorder(self.filePath, self.on_finish_rec)
+
+    def on_finish_rec(self,count):
+        self.recFrame.status.set(f'Записано {count}\n действий')
+        
+    def on_finish_play(self, comm):
+        self.recFrame.status.set(comm)
+
+    def run_play(self):
+        play_actions(self.filePath, self.on_finish_play)
 
     def on_btn_play(self, filePath):
-        play_actions(filePath)
-        # print(f'start from {filePath}')
+        self.filePath = filePath
+        self.playThread = threading.Thread(target=self.run_play)
+        self.playThread.start()
     
 
     # while True:

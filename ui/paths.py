@@ -11,11 +11,14 @@ class RecRows():
                             entVar=pathVar, btnName=BTN_DIR,
                             btnCallBack=func_browse, entWidth=40)
         
-    def file_name_btn(parent_f,fileNameVar, on_btn_rec):
+    def file_name_btn(parent_f,fileNameVar, on_btn_rec, statusVar):
         
         Widgets.lbl_ent_btn(parent_f = parent_f, lblName = LBL_FILE,
                             entVar = fileNameVar, btnName = BTN_REC,
                             btnCallBack = on_btn_rec, entWidth = 30)
+        
+        lblStatus = ttk.Label(parent_f, textvariable=statusVar)
+        lblStatus.pack(padx=10, pady=10)
 
     def act_file_pick(parent_f, pathAct, on_pick_file, on_btn_play):
         

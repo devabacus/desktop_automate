@@ -8,8 +8,9 @@ import time
 # keyboard._win32.KeyCode
 class ActionRecorder():
     
-    def __init__ (self, filePath):
+    def __init__ (self, filePath, on_stop_rec):
         self.filePath = filePath
+        self.on_stop_rec = on_stop_rec
         self.delay = Delay()
         self.act_m = MouseRecorder(self.rec_handle, self.delay)
         self.act_k = KeyboardRecorder(self.rec_handle, self.delay)
@@ -37,5 +38,6 @@ class ActionRecorder():
         self.actions += comm_str
         if 'esc' in comm_str:
             self.write_to_file()
+            self.on_stop_rec(len(self.actions.split('\n')))
             exit()
             
