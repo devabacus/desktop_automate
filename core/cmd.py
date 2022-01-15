@@ -1,20 +1,3 @@
-# class Cmd():
-#     MOUSE_MOVE = lambda x,y: f'mouse.position = ({x},{y})\n'
-#     MOUSE_CLICK = lambda isPress, btn: f'mouse.press({btn})\n' if isPress else f'mouse.release({btn})\n'
-#     SLEEP = lambda x: f'time.sleep({round(x,2)})\n'
-#     MOUSE_SCROLL = lambda x: f'mouse.scroll(0,{x})\n'
-#     KEY_PRESS = lambda key: f'keyboard.press({key})\n'
-#     KEY_RELEASE = lambda key: f'keyboard.release({key})\n'
-    
-    
-    # keyboard.press(Key.space)
-    # keyboard.release(Key.space)
-
-# return comm
-        
-    # MOUSE_CLICK = lambda x,y,btn: f'pg.click({x},{y},button={str(btn).split(".")[1]})\n'
-        
-
 class Cmd():
     MOUSE_MOVE = lambda x,y, delay: f'pg.moveTo({x},{y}, duration={delay})\n'
     SLEEP = lambda delay: f'time.sleep({delay})\n'
@@ -25,19 +8,41 @@ class Cmd():
         comm += 'Down' if isPress else 'Up'
         btn = ''
         if '<' in str(key):
-            num = int(str(key)[1:-1])
-            btn = str(num - 96)
+            btn = Cmd.num_key_convert(key)    
+        elif '\\' in str(key):
+            btn = Cmd.check_key(key)
         else: 
             if len(str(key)) == 3: 
                 btn = str(key)[1:-1]
             else:
                 btn = str(key).split(".")[1]
-                if 'ctrl' in btn:
-                    btn = 'ctrl'
+                if 'ctrl' in btn: btn = 'ctrl'
+                if 'cmd' in btn: btn = 'win'
                 
         comm += f'(\'{btn}\')\n'
         return comm
     
+    
+    def num_key_convert(key):
+        num = int(str(key)[1:-1])
+        btn = ''
+        if num >95 and num < 106:
+            btn = str(num - 96)
+        elif num > 47 and num < 57:
+            btn = str(num - 48)
+        return btn
+        
+        
+    
+    def check_key(key):
+        if key != k.ctrl_l:
+            if '\\x01' in str(key): _key = "'a'"
+            elif '\\x03' in str(key): _key = "'c'"
+            elif '\\x16' in str(key): _key = "'v'"
+            elif '\\x14' in str(key): _key = "'t'"
+            else: _key = key 
+            return _key
+        return key
     
     
     

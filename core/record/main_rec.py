@@ -24,7 +24,8 @@ class ActionRecorder():
 
     def mouse_listen(self):
         listener = mouse.Listener(on_click=self.act_m.on_click,
-                                  on_scroll=self.act_m.on_scroll)
+                                  on_scroll=self.act_m.on_scroll,
+                                  on_move=self.act_m.on_move)
         listener.start()           
     def keyboard_listen(self):
         listener = keyboard.Listener(on_press=self.act_k.on_press,on_release=self.act_k.on_release)

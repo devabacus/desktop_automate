@@ -3,15 +3,7 @@ from pynput.keyboard import Key as k
 
 # '\'\\x03\''
 
-def check_key(key):
-    if key != k.ctrl_l:
-        if '\\x01' in str(key): _key = "'a'"
-        elif '\\x03' in str(key): _key = "'c'"
-        elif '\\x16' in str(key): _key = "'v'"
-        elif '\\x14' in str(key): _key = "'t'"
-        else: _key = key 
-        return _key
-    return key
+
 
 class KeyboardRecorder():
 
@@ -21,10 +13,10 @@ class KeyboardRecorder():
       
     def on_press(self, key):
         self.handle(Cmd.SLEEP(self.delay.get()))
-        self.handle(Cmd.KEY_CMD(check_key(key),True))
+        self.handle(Cmd.KEY_CMD((key),True))
 
     def on_release(self,key):
         self.handle(Cmd.SLEEP(self.delay.get()))
-        self.handle(Cmd.KEY_CMD(check_key(key),False))
+        self.handle(Cmd.KEY_CMD((key),False))
         
 
