@@ -25,13 +25,13 @@ class ActionRecorder():
             f.close()        
 
     def mouse_listen(self):
-        listener = mouse.Listener(on_click=self.act_m.on_click,
+        self.keyListener = mouse.Listener(on_click=self.act_m.on_click,
                                   on_scroll=self.act_m.on_scroll,
                                   on_move=self.act_m.on_move)
-        listener.start()           
+        self.keyListener.start()           
     def keyboard_listen(self):
-        listener = keyboard.Listener(on_press=self.act_k.on_press,on_release=self.act_k.on_release)
-        listener.start() 
+        self.mouseListener = keyboard.Listener(on_press=self.act_k.on_press,on_release=self.act_k.on_release)
+        self.mouseListener.start() 
 
     def rec_handle(self, comm_str):
         print(comm_str)
@@ -39,5 +39,7 @@ class ActionRecorder():
         if 'esc' in comm_str:
             self.write_to_file()
             self.on_stop_rec(len(self.actions.split('\n')))
+            del(self.keyListener)
+            del(self.mouseListener)
             exit()
             

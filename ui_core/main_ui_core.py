@@ -4,20 +4,30 @@ import ui.main_ui as ui
 from ui.rec_frame import RecFrame
 import threading
 from core.play.main_play import *
+import pathlib
+from ui_core.constants.sett_consts import *
+from ui_core.sett_handle import SETT
 
 class MainUiCore():
     
     def __init__ (self):
         _ui = ui.MainUi()
         self.recFrame = RecFrame(self)
+        filePath = SETT.get_value(FILE_PATH)
+        fileName = filePath.split('/')[-1].split('.')[0] if len(filePath) > 0 else ''
+        self.recFrame.pathSave.set(SETT.get_value(DIR_PATH))
+        self.recFrame.optVars.set(SETT.get_value(SPEED))
+        self.recFrame.pathAct.set(filePath)
+        self.recFrame.fileName.set(fileName)
+        
         _ui.loop()
         
     def dir_path_handle(self,path):
         self.pathDir = path
-        print(path)
+        SETT.save_value(DIR_PATH, path)
     
     def on_opt_rec(self, val):
-        print(val)
+        SETT.save_value(SPEED, val)
     
     def start_record(self, fileName):
         self.filePath = self.recFrame.pathSave.get() + '/' + fileName + '.txt'
@@ -25,7 +35,6 @@ class MainUiCore():
         self.recordThread.start()
         
     def run_record(self):
-        
         ActionRecorder(self.filePath, self.on_finish_rec)
 
     def on_finish_rec(self,count):
@@ -35,10 +44,13 @@ class MainUiCore():
         self.recFrame.status.set(comm)
 
     def run_play(self):
-        play_actions(self.filePath, self.on_finish_play)
+        play_actions(self.filePath,
+                     self.on_finish_play,
+                     self.recFrame.optVars)
 
     def on_btn_play(self, filePath):
         self.filePath = filePath
+        SETT.save_value(FILE_PATH, filePath)
         self.playThread = threading.Thread(target=self.run_play)
         self.playThread.start()
     
