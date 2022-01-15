@@ -1,15 +1,15 @@
 import pyautogui as pg
-
+import re
 # pyautogui.drag(100, 100, 0.2, button='left')
 
 # pg.moveTo(100,400,0.54)
+key = '\'\\x14\''
 
-def check_key(key):
-    if key != k.ctrl_l:
-        if '\\x01' in str(key): _key = "'a'"
-        elif '\\x03' in str(key): _key = "'c'"
-        elif '\\x16' in str(key): _key = "'v'"
-        elif '\\x14' in str(key): _key = "'t'"
-        else: _key = key 
-        return _key
-    return key
+if '\\x' in key:
+    _key = str(key)
+    _key = _key.replace('\\', '0')
+    _key = re.findall(r'(0x.*)\'', _key)[0]
+    num_chr = int(_key, 16) + 96
+    mchar = chr(num_chr)
+    print(mchar)
+

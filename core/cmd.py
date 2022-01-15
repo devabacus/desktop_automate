@@ -1,16 +1,20 @@
+import re
+
+
 class Cmd():
     MOUSE_MOVE = lambda x,y, delay: f'pg.moveTo({x},{y}, duration={delay})\n'
     SLEEP = lambda delay: f'time.sleep({delay})\n'
     MOUSE_SCROLL = lambda y: f'mouse.scroll(0,{y})\n'
     
     def KEY_CMD(key, isPress):
+        _key = str(key)
         comm = 'pg.key'
         comm += 'Down' if isPress else 'Up'
         btn = ''
-        if '<' in str(key):
+        if '<' in _key:
             btn = Cmd.num_key_convert(key)    
-        elif '\\' in str(key):
-            btn = Cmd.check_key(key)
+        elif '\\x' in _key:
+            btn = Cmd.check_key(_key)
         else: 
             if len(str(key)) == 3: 
                 btn = str(key)[1:-1]
@@ -35,14 +39,11 @@ class Cmd():
         
     
     def check_key(key):
-        if key != k.ctrl_l:
-            if '\\x01' in str(key): _key = "'a'"
-            elif '\\x03' in str(key): _key = "'c'"
-            elif '\\x16' in str(key): _key = "'v'"
-            elif '\\x14' in str(key): _key = "'t'"
-            else: _key = key 
-            return _key
-        return key
+        _key = key.replace('\\', '0')
+        _key = re.findall(r'(0x.*)\'', _key)[0]
+        num_chr = int(_key, 16) + 96
+        mchar = chr(num_chr)
+        return mchar
     
     
     
