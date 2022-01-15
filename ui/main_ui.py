@@ -5,6 +5,7 @@ class MainUi():
     
     def __init__ (self):
         self.root = ttk.Window()
+        self.root.title("Actions")
         # self.create_rec_frame()
         
     def loop(self):
