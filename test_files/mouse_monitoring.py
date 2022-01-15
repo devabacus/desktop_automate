@@ -8,9 +8,9 @@ def on_click(x, y, button, pressed):
     print('{0} at {1}'.format(
         'Pressed' if pressed else 'Released',
         (x, y)))
-    if not pressed:
+    # if not pressed:
         # Stop listener
-        return False
+        # return False
 
 def on_scroll(x, y, dx, dy):
     print('Scrolled {0} at {1}'.format(

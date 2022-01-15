@@ -22,6 +22,7 @@ class Cmd():
                 btn = str(key).split(".")[1]
                 if 'ctrl' in btn: btn = 'ctrl'
                 if 'cmd' in btn: btn = 'win'
+                if 'alt' in btn: btn = 'alt'
                 
         comm += f'(\'{btn}\')\n'
         return comm

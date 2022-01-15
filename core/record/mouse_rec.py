@@ -26,7 +26,7 @@ class MouseRecorder():
         
         
     def on_move(self, x, y):
-        if abs(x-self.x) > 50 or abs(y-self.y) > 50:
+        if abs(x-self.x) > 3000 or abs(y-self.y) > 3000:
             self.handle(Cmd.MOUSE_MOVE(x,y,self.delay.get()))
             self.x, self.y = x,y
             
