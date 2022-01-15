@@ -8,4 +8,6 @@ class Delay():
     def get(self):
         delay = round(time.perf_counter(),2) - self.last_time_act
         self.last_time_act = round(time.perf_counter(), 2)
-        return round(delay, 2)
+        delay = round(delay, 2) 
+        # print(f'delay = {delay}, last_time_act = {self.last_time_act}')
+        return delay

@@ -5,11 +5,10 @@ from pynput.keyboard import Key as k
 
 def check_key(key):
     if key != k.ctrl_l:
-        if '01' in str(key): 
-           _key = "'a'"
-        elif '03' in str(key): _key = "'c'"
-        elif '16' in str(key): _key = "'v'"
-        elif '14' in str(key): _key = "'t'"
+        if '\\x01' in str(key): _key = "'a'"
+        elif '\\x03' in str(key): _key = "'c'"
+        elif '\\x16' in str(key): _key = "'v'"
+        elif '\\x14' in str(key): _key = "'t'"
         else: _key = key 
         return _key
     return key

@@ -18,22 +18,28 @@
 class Cmd():
     MOUSE_MOVE = lambda x,y, delay: f'pg.moveTo({x},{y}, duration={delay})\n'
     SLEEP = lambda delay: f'time.sleep({delay})\n'
-    # MOUSE_SCROLL = lambda y: f'pg.scroll({y}00)\n'
     MOUSE_SCROLL = lambda y: f'mouse.scroll(0,{y})\n'
     
     def KEY_CMD(key, isPress):
         comm = 'pg.key'
         comm += 'Down' if isPress else 'Up'
         btn = ''
-        if len(str(key)) == 3:
-            comm += f'({key})\n'    
-        else:
-            btn = str(key).split(".")[1]
-            if 'ctrl' in btn:
-                btn = 'ctrl'
-            comm += f'(\'{btn}\')\n'
+        if '<' in str(key):
+            num = int(str(key)[1:-1])
+            btn = str(num - 96)
+        else: 
+            if len(str(key)) == 3: 
+                btn = str(key)[1:-1]
+            else:
+                btn = str(key).split(".")[1]
+                if 'ctrl' in btn:
+                    btn = 'ctrl'
+                
+        comm += f'(\'{btn}\')\n'
         return comm
-            
+    
+    
+    
     
     def MOUSE_CLICK(x,y,pressed, btn):
         comm = 'pg.mouse'
