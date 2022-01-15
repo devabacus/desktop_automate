@@ -3,7 +3,7 @@ import re
 
 class Cmd():
     MOUSE_MOVE = lambda x,y, delay: f'pg.moveTo({x},{y}, duration={delay})\n'
-    SLEEP = lambda delay: f'time.sleep({delay})\n'
+    SLEEP = lambda delay: f'time.sleep({delay})\n' 
     MOUSE_SCROLL = lambda y: f'mouse.scroll(0,{y})\n'
     
     def KEY_CMD(key, isPress):
@@ -21,6 +21,7 @@ class Cmd():
             else:
                 btn = str(key).split(".")[1]
                 if 'ctrl' in btn: btn = 'ctrl'
+                if 'shift' in btn: btn = 'shift'
                 if 'cmd' in btn: btn = 'win'
                 if 'alt' in btn: btn = 'alt'
                 
