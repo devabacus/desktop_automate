@@ -3,6 +3,7 @@ from core.record.main_rec import ActionRecorder
 import ui.main_ui as ui
 from ui.rec_frame import RecFrame
 import threading
+from core.play.main_play import *
 
 class MainUiCore():
     
@@ -27,7 +28,8 @@ class MainUiCore():
         ActionRecorder(self.filePath)
 
     def on_btn_play(self, filePath):
-        print(f'start from {filePath}')
+        play_actions(filePath)
+        # print(f'start from {filePath}')
     
 
     # while True:
