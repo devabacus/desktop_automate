@@ -8,24 +8,26 @@ class MainUiCore():
     
     def __init__ (self):
         _ui = ui.MainUi()
-        RecFrame(self)
+        self.recFrame = RecFrame(self)
         _ui.loop()
         
     def dir_path_handle(self,path):
+        self.pathDir = path
         print(path)
     
     def on_opt_rec(self, val):
         print(val)
     
     def start_record(self, fileName):
-        print(fileName)
-        # self.recordThread = threading.Thread(target=self.run_record)
+        self.filePath = self.recFrame.pathSave.get() + '/' + fileName + '.txt'
+        self.recordThread = threading.Thread(target=self.run_record)
+        self.recordThread.start()
         
     def run_record(self):
-        ActionRecorder()
+        ActionRecorder(self.filePath)
 
-    def on_btn_play(self):
-        print("start play")
+    def on_btn_play(self, filePath):
+        print(f'start from {filePath}')
     
 
     # while True:

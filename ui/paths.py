@@ -17,11 +17,14 @@ class RecRows():
                             entVar = fileNameVar, btnName = BTN_REC,
                             btnCallBack = on_btn_rec, entWidth = 30)
 
-    def play_act(parent_f, pathAct, on_btn_play):
+    def act_file_pick(parent_f, pathAct, on_pick_file, on_btn_play):
         
         Widgets.lbl_ent_btn(parent_f=parent_f, lblName=FILE_PATH,
-                            entVar = pathAct, btnName=BTN_PLAY,
-                            btnCallBack=on_btn_play, entWidth=40, btnStyle=DANGER)
+                            entVar = pathAct, btnName=BTN_DIR,
+                            btnCallBack=on_pick_file, entWidth=40)
+        
+        btnPlay = ttk.Button(parent_f, text=BTN_PLAY, style=DANGER, command=on_btn_play)
+        btnPlay.pack(padx=10, pady=10)
 
 
     def opt_rec(parent_f, speedVar, on_opt_rec):

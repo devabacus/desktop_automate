@@ -5,7 +5,7 @@ from ui.texts import *
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from ui.paths import RecRows
-from tkinter.filedialog import askdirectory
+from tkinter.filedialog import askdirectory, askopenfilename
 from PIL import Image, ImageTk
 from pathlib import Path
 
@@ -41,11 +41,18 @@ class RecFrame():
     def create_frames(self):
         RecRows.dir_path(self.dir_path_f, self.pathSave, self.on_dir_browse)
         RecRows.file_name_btn(self.btn_file_f, self.fileName, self.on_btn_rec)
-        RecRows.play_act(self.start_act, self.pathAct, self.on_btn_play)
+        RecRows.act_file_pick(self.start_act, self.pathAct, self.on_pick_file, self.on_btn_play)
         RecRows.opt_rec(self.rec_opts, self.optVars, self.on_opt_rec)
 
     def on_btn_play(self):
-        self.ui_core.on_btn_play()
+        self.ui_core.on_btn_play(self.pathAct.get())
+        
+
+    def on_pick_file(self):
+        filePath = askopenfilename(title=ASK_FILE_TITLE)
+        if filePath:
+            self.pathAct.set(filePath)
+            print(self.pathAct.get())
     
     def on_opt_rec(self):
         self.ui_core.on_opt_rec(self.optVars.get())

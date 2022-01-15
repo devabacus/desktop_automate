@@ -8,7 +8,8 @@ import time
 # keyboard._win32.KeyCode
 class ActionRecorder():
     
-    def __init__ (self):
+    def __init__ (self, filePath):
+        self.filePath = filePath
         self.delay = Delay()
         self.act_m = MouseRecorder(self.rec_handle, self.delay)
         self.act_k = KeyboardRecorder(self.rec_handle, self.delay)
@@ -18,7 +19,7 @@ class ActionRecorder():
         self.last_time_act = round(time.perf_counter(),2)
     
     def write_to_file(self):
-        with open('actions.txt', 'w', encoding = 'utf8') as f:
+        with open(self.filePath, 'w', encoding = 'utf8') as f:
             f.write(self.actions)
             f.close()        
 
