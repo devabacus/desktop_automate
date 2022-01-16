@@ -20,6 +20,10 @@ class MainPlay():
                 return r.split('\n')
         except: print("No such a file")
     
+    
+    def exec_cmd(self, cmd, div):
+        exec(change_delay(cmd,div))   
+    
     def play_actions(self, path, on_status, opts):
         
         mouse = ms.Controller()
@@ -34,7 +38,7 @@ class MainPlay():
         on_status(WORK_PLAY_STATUS(rem_rpts, rem_cmds))
         for item in range(0, repeats):
             for cmd in cmds:
-                exec(change_delay(cmd,div))   
+                self.exec_cmd(cmd, div)
                 rem_cmds -= 1     
                 on_status(WORK_PLAY_STATUS(rem_rpts, rem_cmds))
             rem_rpts -= 1

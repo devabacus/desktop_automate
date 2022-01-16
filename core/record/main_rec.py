@@ -4,6 +4,9 @@ from core.record.delay import Delay
 from core.record.keyboard_rec import KeyboardRecorder
 from core.record.mouse_rec import MouseRecorder
 import time
+from ui_core.constants.sett_consts import *
+
+from ui_core.sett_handle import SETT
 
 class ActionRecorder():
     
@@ -11,7 +14,8 @@ class ActionRecorder():
         self.filePath = filePath
         self.on_stop_rec = on_stop_rec
         self.delay = Delay()
-        self.act_m = MouseRecorder(self.rec_handle, self.delay)
+        mode = SETT.get_value(CUR_REC_TYPE)
+        self.act_m = MouseRecorder(self.rec_handle, self.delay, mode)
         self.act_k = KeyboardRecorder(self.rec_handle, self.delay)
         self.mouse_listen()
         self.keyboard_listen()
