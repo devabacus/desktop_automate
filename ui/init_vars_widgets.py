@@ -1,5 +1,6 @@
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+from ui.texts import *
 from ui_core.sett_handle import SETT
 from ui_core.constants.sett_consts import *
 
@@ -13,8 +14,7 @@ def init_vars(self):
         opts = SETT.get_value(OPTS)
         self.optSpeed = ttk.StringVar(value = opts[SPEED])
         self.optRepeats = ttk.StringVar(value = opts[REPEATS])
-        self.status = ttk.StringVar(value = "Готов к записи")
-        self.repeats = ttk.StringVar(value = "1")
+        self.status = ttk.StringVar(value = STATUS_START)
         
 def init_frames(self):
     self.dir_path_f = ttk.Frame()

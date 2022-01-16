@@ -20,19 +20,16 @@ class RecRows():
         lblStatus = ttk.Label(parent_f, textvariable=statusVar)
         lblStatus.pack(padx=10, pady=10)
 
-    def act_file_pick(parent_f, pathAct, on_pick_file, on_btn_play):
+    def act_file_pick(parent_f, pathAct, on_pick_file):
         
         Widgets.lbl_ent_btn(parent_f=parent_f, lblName=FILE_PATH,
                             entVar = pathAct, btnName=BTN_DIR,
                             btnCallBack=on_pick_file, entWidth=40)
         
-        btnPlay = ttk.Button(parent_f, text=BTN_PLAY, style=DANGER, command=on_btn_play)
-        btnPlay.pack(padx=10, pady=10)
-
-    def opt_rec(parent_f, speedVar, repeats, on_opts_save):
+    def opt_rec(parent_f, speedVar, repeats, on_btn_play):
         
-        btnSaveOpt = ttk.Button(parent_f,text=BTN_SAVE_OPT, style=PRIMARY, command=on_opts_save)
-        btnSaveOpt.pack(padx=10, pady=10, side=RIGHT, anchor=SE)
+        btnPlay = ttk.Button(parent_f, text=BTN_PLAY, style=DANGER, command=on_btn_play)
+        btnPlay.pack(padx=10, pady=10, side=RIGHT, anchor=SE)
         
         speed_f = ttk.Frame(parent_f)
         repeat_f = ttk.Frame(parent_f)

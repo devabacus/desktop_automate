@@ -21,8 +21,7 @@ class MainUiCore():
     
     def on_opt_rec(self, opts):
         SETT.save_value(OPTS, opts)
-        speed = opts[SPEED]
-        repeats = opts[REPEATS]
+        
     
     def start_record(self, fileName):
         self.filePath = self.recFrame.pathSave.get() + '/' + fileName + '.txt'
@@ -41,10 +40,12 @@ class MainUiCore():
     def run_play(self):
         play_actions(self.filePath,
                      self.on_finish_play,
-                     self.recFrame.optVars)
+                     self.opts)
 
-    def on_btn_play(self, filePath):
+    def on_btn_play(self, filePath, opts):
         self.filePath = filePath
+        self.opts =opts
         SETT.save_value(FILE_PATH, filePath)
+        SETT.save_value(OPTS, opts)
         self.playThread = threading.Thread(target=self.run_play)
         self.playThread.start()

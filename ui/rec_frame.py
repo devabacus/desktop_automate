@@ -17,11 +17,12 @@ class RecFrame():
     def create_frames(self):
         RecRows.dir_path(self.dir_path_f, self.pathSave, self.on_dir_browse)
         RecRows.file_name_btn(self.btn_file_f, self.fileName, self.on_btn_rec, self.status)
-        RecRows.act_file_pick(self.start_act_f, self.pathAct, self.on_pick_file, self.on_btn_play)
-        RecRows.opt_rec(self.rec_opts_f, self.optSpeed, self.optRepeats, self.on_opts_rec)
+        RecRows.act_file_pick(self.start_act_f, self.pathAct, self.on_pick_file)
+        RecRows.opt_rec(self.rec_opts_f, self.optSpeed, self.optRepeats, self.on_btn_play)
 
     def on_btn_play(self):
-        self.ui_core.on_btn_play(self.pathAct.get())
+        self.ui_core.on_btn_play(self.pathAct.get(),
+                                 {SPEED:self.optSpeed.get(), REPEATS:self.optRepeats.get()})
         
     def setStatus(self,status):
         self.status = status
@@ -31,9 +32,6 @@ class RecFrame():
         if filePath:
             self.pathAct.set(filePath)
             print(self.pathAct.get())
-    
-    def on_opts_rec(self):
-        self.ui_core.on_opt_rec({SPEED:self.optSpeed.get(), REPEATS:self.optRepeats.get()})
     
     def on_btn_rec(self):
         self.status.set("Идет запись...")
