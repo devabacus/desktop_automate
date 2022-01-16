@@ -21,10 +21,6 @@ class MainUiCore():
         self.pathDir = path
         SETT.save_value(DIR_PATH, path)
     
-    def on_opt_rec(self, opts):
-        SETT.save_value(OPTS, opts)
-        
-    
     def start_record(self, fileName):
         self.filePath = self.recFrame.pathSave.get() + '/' + fileName + '.txt'
         print(fileName)
