@@ -23,7 +23,6 @@ class MainUiCore():
     
     def start_record(self, fileName):
         self.filePath = self.recFrame.pathSave.get() + '/' + fileName + '.txt'
-        print(fileName)
         SETT.save_value(FILE_NAME, fileName)
         self.recordThread = threading.Thread(target=self.run_record)
         self.recordThread.start()
@@ -38,11 +37,13 @@ class MainUiCore():
         self.recFrame.status.set(comm)
 
     def run_play(self):
-        play_actions(self.filePath,
+        player = MainPlay()
+        player.play_actions(self.filePath,
                      self.on_finish_play,
                      self.opts)
 
     def on_btn_play(self, filePath, opts):
+        print(filePath)
         self.filePath = filePath
         self.opts =opts
         SETT.save_value(FILE_PATH, filePath)

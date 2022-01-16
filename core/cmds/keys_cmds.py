@@ -1,20 +1,21 @@
 import re
 
-
-class Cmd():
-    MOUSE_MOVE = lambda x,y, delay: f'pg.moveTo({x},{y}, duration={delay})\n'
-    SLEEP = lambda delay: f'time.sleep({delay})\n' 
-    MOUSE_SCROLL = lambda y: f'mouse.scroll(0,{y})\n'
+class KeyCmds():
     
-    def KEY_CMD(key, isPress):
+    def __init__ (self):
+        pass
+    
+    SLEEP = lambda self, delay: f'time.sleep({delay})\n' 
+    
+    def KEY_CMD(self, key, isPress):
         _key = str(key)
         comm = 'pg.key'
         comm += 'Down' if isPress else 'Up'
         btn = ''
         if '<' in _key:
-            btn = Cmd.num_key_convert(key)    
+            btn = self.num_key_convert(key)    
         elif '\\x' in _key:
-            btn = Cmd.check_key(_key)
+            btn = self.check_key(_key)
         else: 
             if len(str(key)) == 3: 
                 btn = str(key)[1:-1]
@@ -29,7 +30,7 @@ class Cmd():
         return comm
     
     
-    def num_key_convert(key):
+    def num_key_convert(self, key):
         num = int(str(key)[1:-1])
         btn = ''
         if num >95 and num < 106:
@@ -40,18 +41,9 @@ class Cmd():
         
         
     
-    def check_key(key):
+    def check_key(self, key):
         _key = key.replace('\\', '0')
         _key = re.findall(r'(0x.*)\'', _key)[0]
         num_chr = int(_key, 16) + 96
         mchar = chr(num_chr)
         return mchar
-    
-    
-    
-    def MOUSE_CLICK(x,y,pressed, btn):
-        comm = 'pg.mouse'
-        comm += 'Down' if pressed else 'Up' 
-        comm += f'(button=\'{str(btn).split(".")[1]}\', '
-        comm += f'x={x}, y={y})\n'
-        return comm

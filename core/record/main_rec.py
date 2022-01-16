@@ -1,11 +1,10 @@
-from core.cmd import Cmd
+from core.cmds.mouse_cmds import MouseCmds
 from pynput import mouse,keyboard
 from core.record.delay import Delay
 from core.record.keyboard_rec import KeyboardRecorder
 from core.record.mouse_rec import MouseRecorder
 import time
 
-# keyboard._win32.KeyCode
 class ActionRecorder():
     
     def __init__ (self, filePath, on_stop_rec):
@@ -25,13 +24,13 @@ class ActionRecorder():
             f.close()        
 
     def mouse_listen(self):
-        self.keyListener = mouse.Listener(on_click=self.act_m.on_click,
+        Listener = mouse.Listener(on_click=self.act_m.on_click,
                                   on_scroll=self.act_m.on_scroll,
                                   on_move=self.act_m.on_move)
-        self.keyListener.start()           
+        Listener.start()           
     def keyboard_listen(self):
-        self.mouseListener = keyboard.Listener(on_press=self.act_k.on_press,on_release=self.act_k.on_release)
-        self.mouseListener.start() 
+        Listener = keyboard.Listener(on_press=self.act_k.on_press,on_release=self.act_k.on_release)
+        Listener.start() 
 
     def rec_handle(self, comm_str):
         print(comm_str)
@@ -39,7 +38,5 @@ class ActionRecorder():
         if 'esc' in comm_str:
             self.write_to_file()
             self.on_stop_rec(len(self.actions.split('\n')))
-            del(self.keyListener)
-            del(self.mouseListener)
             exit()
-            
+                

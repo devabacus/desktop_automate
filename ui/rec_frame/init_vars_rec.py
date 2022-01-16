@@ -8,7 +8,6 @@ def init_rec_vars(self):
     self.pathSave = ttk.StringVar(value = SETT.get_value(DIR_PATH))
     self.fileName = ttk.StringVar(value = SETT.get_value(FILE_NAME))
     self.recOpts = ['Все задержки', 'Только перемещений', 'Без задержек']
-    self.curRecOpt = 'Иван'
     self.status = ttk.StringVar(value = '')
     
 def init_rec_frames(self):

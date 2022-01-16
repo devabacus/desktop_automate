@@ -19,7 +19,7 @@ class RecFrame():
     
     def create_frames(self):
         create_dir_path(self.dir_path_f, self.pathSave, lambda : on_dir_browse(self))
-        create_file_name_btn(self.btn_file_f, self.fileName, lambda: on_btn_rec(self), self.status, self.recOpts, self.curRecOpt)
+        create_file_name_btn(self, self.btn_file_f, self.fileName, lambda: on_btn_rec(self), self.status, self.recOpts)
         
     
     
