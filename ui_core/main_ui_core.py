@@ -7,22 +7,22 @@ from core.play.main_play import *
 import pathlib
 from ui_core.constants.sett_consts import *
 from ui_core.sett_handle import SETT
-from ui_core.sett_init import *
 
 class MainUiCore():
     
     def __init__ (self):
         _ui = ui.MainUi()
         self.recFrame = RecFrame(self)
-        initialize_setts(self.recFrame)
         _ui.loop()
         
     def dir_path_handle(self,path):
         self.pathDir = path
         SETT.save_value(DIR_PATH, path)
     
-    def on_opt_rec(self, val):
-        SETT.save_value(SPEED, val)
+    def on_opt_rec(self, opts):
+        SETT.save_value(OPTS, opts)
+        speed = opts[SPEED]
+        repeats = opts[REPEATS]
     
     def start_record(self, fileName):
         self.filePath = self.recFrame.pathSave.get() + '/' + fileName + '.txt'

@@ -1,17 +1,9 @@
-import imghdr
-from tkinter import PhotoImage
 from tkinter import *
-from ui.init_vars_widgets import *
-from ui.texts import *
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
-from ui.paths import RecRows
 from tkinter.filedialog import askdirectory, askopenfilename
-from PIL import Image, ImageTk
-from pathlib import Path
-
-from ui.widgets import Widgets
-
+from ttkbootstrap.constants import *
+from ui.init_vars_widgets import *
+from ui.rec_rows import RecRows
+from ui.texts import *
 
 class RecFrame():
     
@@ -25,8 +17,8 @@ class RecFrame():
     def create_frames(self):
         RecRows.dir_path(self.dir_path_f, self.pathSave, self.on_dir_browse)
         RecRows.file_name_btn(self.btn_file_f, self.fileName, self.on_btn_rec, self.status)
-        RecRows.act_file_pick(self.start_act, self.pathAct, self.on_pick_file, self.on_btn_play)
-        RecRows.opt_rec(self.rec_opts, self.optVars, self.on_opt_rec)
+        RecRows.act_file_pick(self.start_act_f, self.pathAct, self.on_pick_file, self.on_btn_play)
+        RecRows.opt_rec(self.rec_opts_f, self.optSpeed, self.optRepeats, self.on_opts_rec)
 
     def on_btn_play(self):
         self.ui_core.on_btn_play(self.pathAct.get())
@@ -40,8 +32,8 @@ class RecFrame():
             self.pathAct.set(filePath)
             print(self.pathAct.get())
     
-    def on_opt_rec(self):
-        self.ui_core.on_opt_rec(self.optVars.get())
+    def on_opts_rec(self):
+        self.ui_core.on_opt_rec({SPEED:self.optSpeed.get(), REPEATS:self.optRepeats.get()})
     
     def on_btn_rec(self):
         self.status.set("Идет запись...")

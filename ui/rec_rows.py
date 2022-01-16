@@ -29,12 +29,20 @@ class RecRows():
         btnPlay = ttk.Button(parent_f, text=BTN_PLAY, style=DANGER, command=on_btn_play)
         btnPlay.pack(padx=10, pady=10)
 
-
-    def opt_rec(parent_f, speedVar, on_opt_rec):
+    def opt_rec(parent_f, speedVar, repeats, on_opts_save):
         
-        Widgets.lbl_ent_btn(parent_f=parent_f, lblName=LBL_SPEED,
-                            entVar = speedVar, btnName=BTN_OPT,
-                            btnCallBack=on_opt_rec, entWidth=15)
+        btnSaveOpt = ttk.Button(parent_f,text=BTN_SAVE_OPT, style=PRIMARY, command=on_opts_save)
+        btnSaveOpt.pack(padx=10, pady=10, side=RIGHT, anchor=SE)
+        
+        speed_f = ttk.Frame(parent_f)
+        repeat_f = ttk.Frame(parent_f)
+        Widgets.lbl_ent_vert(parent_f=speed_f, lblName=LBL_SPEED,
+                            entVar = speedVar)
+        Widgets.lbl_ent_vert(parent_f=repeat_f, lblName=LBL_REPEATS,
+                            entVar = repeats)
+        
+        speed_f.pack(side=LEFT)
+        repeat_f.pack(side=LEFT)
         
         
         

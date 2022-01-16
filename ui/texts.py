@@ -3,7 +3,8 @@
 LBL_FILE = "Название\n экшена"
 BTN_REC = "Начать запись"
 LBL_SPEED = "Ускорение"
-BTN_OPT = "Сохранить"
+LBL_REPEATS = "Повторений"
+BTN_SAVE_OPT = "Сохранить"
 FILE_PATH = "Файл экшена"
 BTN_PLAY = "Запуск"
 
