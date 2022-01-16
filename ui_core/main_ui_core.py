@@ -7,19 +7,14 @@ from core.play.main_play import *
 import pathlib
 from ui_core.constants.sett_consts import *
 from ui_core.sett_handle import SETT
+from ui_core.sett_init import *
 
 class MainUiCore():
     
     def __init__ (self):
         _ui = ui.MainUi()
         self.recFrame = RecFrame(self)
-        filePath = SETT.get_value(FILE_PATH)
-        fileName = filePath.split('/')[-1].split('.')[0] if len(filePath) > 0 else ''
-        self.recFrame.pathSave.set(SETT.get_value(DIR_PATH))
-        self.recFrame.optVars.set(SETT.get_value(SPEED))
-        self.recFrame.pathAct.set(filePath)
-        self.recFrame.fileName.set(fileName)
-        
+        initialize_setts(self.recFrame)
         _ui.loop()
         
     def dir_path_handle(self,path):
@@ -53,8 +48,3 @@ class MainUiCore():
         SETT.save_value(FILE_PATH, filePath)
         self.playThread = threading.Thread(target=self.run_play)
         self.playThread.start()
-    
-
-    # while True:
-    #     time.sleep(10)
-    

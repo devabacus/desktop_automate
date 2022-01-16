@@ -22,5 +22,5 @@ def check_key(key):
     elif '\\x03' in str(key): _key = "'c'"
     elif '\\x16' in str(key): _key = "'v'"
     elif '\\x14' in str(key): _key = "'t'"
-    else: _key = key 
+    else: _key = key
     return _key
