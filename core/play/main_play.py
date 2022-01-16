@@ -27,7 +27,7 @@ def play_actions(fileActionsPath, on_status, opts):
         rem_cmds = len(cmds)
         rem_rpts = repeats
         on_status(WORK_PLAY_STATUS(rem_rpts, rem_cmds))
-        for item in range(0, repeats):
+        for item in range(1, repeats):
             for cmd in cmds:
                 exec(cmd)   
                 rem_cmds -= 1     

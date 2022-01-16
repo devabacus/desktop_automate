@@ -1,18 +1,20 @@
 import threading
 from core.record.main_rec import ActionRecorder
 import ui.main_ui as ui
-from ui.rec_frame import RecFrame
 import threading
 from core.play.main_play import *
 import pathlib
 from ui_core.constants.sett_consts import *
 from ui_core.sett_handle import SETT
+from ui.play_frame.play_frame import PlayFrame
+from ui.rec_frame.rec_frame import RecFrame
 
 class MainUiCore():
     
     def __init__ (self):
         _ui = ui.MainUi()
         self.recFrame = RecFrame(self)
+        self.playFrame = PlayFrame(self)
         _ui.loop()
         
     def dir_path_handle(self,path):
@@ -25,6 +27,8 @@ class MainUiCore():
     
     def start_record(self, fileName):
         self.filePath = self.recFrame.pathSave.get() + '/' + fileName + '.txt'
+        print(fileName)
+        SETT.save_value(FILE_NAME, fileName)
         self.recordThread = threading.Thread(target=self.run_record)
         self.recordThread.start()
         
